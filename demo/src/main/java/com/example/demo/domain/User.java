@@ -13,6 +13,8 @@ public class User {
     @Id
     private String id;
     private  String email;
+    private String idTour;
+    private String tourName;
 
  public User(String name, int age, String number,String email) {
   this.name = name;

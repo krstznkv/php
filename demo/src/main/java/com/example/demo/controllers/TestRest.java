@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controllers;
 
 import com.example.demo.domain.Message;
 import com.example.demo.domain.Tour;
@@ -36,25 +36,13 @@ public class TestRest {
     @GetMapping("deleteAll")
     public ResponseEntity<Message> deleteAllTour() {
         service.deleteAll();
+        userService.deleteAll();
         return ResponseEntity.ok(new Message("ok"));
     }
     @DeleteMapping("deleteFromTour/{idTour}/{idUser}")
-    public void deleteFromTour(@PathVariable String idTour, @PathVariable String idUser){
+    public void deleteFromTour( @PathVariable  String idTour, @PathVariable  String idUser){
         userService.deleteFromTour(idTour,idUser);
     }
-    @PutMapping("updateUser/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String tourId,@RequestBody User user) {
 
-        return ResponseEntity.ok(userService.updateUser(tourId,user));
-    }
-    @PostMapping("createUser/{tourId}")
-    public ResponseEntity<User> createUser(@PathVariable String tourId,@RequestBody User user) {
-
-        return ResponseEntity.ok(userService.saveUser(tourId,user));
-    }
-    @DeleteMapping("deleteUser/{idTour}/{idUser}")
-    public void deleteUser(@PathVariable String idTour, @PathVariable String idUser){
-        userService.deleteFromTour(idTour,idUser);
-    }
 
 }

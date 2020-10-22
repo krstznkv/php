@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.domain.Tour;
+import com.example.demo.domain.User;
 import com.example.demo.repo.TourRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -32,9 +33,12 @@ public class TourService {
     }
     public void remove(String id){
         Tour tour=this.findById(id);
-        Tour clients=tourRepo.findByName("ClientBase");
-        clients.getMembers().addAll(tour.getMembers());
-        this.update(clients);
+        List<User> users=tour.getMembers();
+        for (User user:users
+             ) {
+            user.setIdTour("does't selected");
+            mongoOperations.save(user);
+        }
         tourRepo.deleteById(id);
     }
     public void deleteAll(){
